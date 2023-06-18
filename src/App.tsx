@@ -11,6 +11,7 @@ type State = {
   todos: Todo[];
   addTodo: (text: string) => void;
   toggleTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
 };
 
 const useStore = create<State>((set) => ({
@@ -27,6 +28,10 @@ const useStore = create<State>((set) => ({
       todos: state.todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       ),
+    })),
+  deleteTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.map((todo) => (todo.id === id ? { ...todo } : todo)),
     })),
 }));
 
